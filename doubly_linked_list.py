@@ -14,13 +14,13 @@ class DoublyLinkList(linked_list.LinkedList):
 
     def __init__(self):
         super().__init__()
-        self.__count = 0
+        self.count = 0
 
     def add_head(self, value):
+        old_head = self.head
         super().append_node(value)
         if super().get_len() > 1:
-            old_head = self.head
-            old_head.next_node = self.head
+            old_head.prev_node = self.head
         else:
             self.tail = self.head
 
@@ -44,7 +44,7 @@ class DoublyLinkList(linked_list.LinkedList):
             if super().get_len() > 1:
                 self.tail = self.tail.prev_node
             self.tail.next_node = None
-            self.__count -= 1
+            self.count -= 1
             return old_tail
         
     def clear(self):
@@ -60,14 +60,14 @@ if __name__ == '__main__':
     my_doubly_linked_list.add_head(10)
     my_doubly_linked_list.add_head(20)
 
-    print(my_doubly_linked_list.head.data)
-    print(my_doubly_linked_list.tail.data)
+    print('Head: ', my_doubly_linked_list.head)
+    print('Tail: ', my_doubly_linked_list.tail)
 
     my_doubly_linked_list.add_tail(30)
-    print(my_doubly_linked_list.get_value(1))
+    print('Get value of index 1: ', my_doubly_linked_list.get_value(1))
 
-    print(my_doubly_linked_list.pop_tail())
-    print(my_doubly_linked_list.get_len())
+    print('Popped value from tail: ', my_doubly_linked_list.pop_tail())
+    print('Length: ', my_doubly_linked_list.get_len())
     
     my_doubly_linked_list.clear()
-    print(my_doubly_linked_list.get_len())
+    print('Length: ', my_doubly_linked_list.get_len())
